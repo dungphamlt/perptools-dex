@@ -24,7 +24,7 @@ function Footer() {
           <div className="w-full md:w-3/5 flex flex-col justify-center items-center md:items-start gap-4">
             <div className="flex items-center gap-4">
               <Logo className="w-14 h-14" />
-              <h2 className="text-2xl font-bold text-white">PerpTools</h2>
+              <h2 className="text-2xl font-bold text-white">PERPTools</h2>
             </div>
             <p className="text-gray-300 pt-6 text-center md:text-left px-4 md:px-0">
               ApeX Protocol is shaping a free and open ecosystem for all users

@@ -4,8 +4,11 @@ import "./globals.css";
 import { WalletContextProvider } from "../components/WalletProvider";
 
 export const metadata: Metadata = {
-  title: "PerpTools",
+  title: "PERPTools",
   description: "AI meets DeFi — Perpetuals Reinvented",
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({
