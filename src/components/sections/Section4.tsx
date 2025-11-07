@@ -9,25 +9,25 @@ function Section4() {
   const products = [
     {
       title: "CEX-grade speed, DeFi principles",
-      icon: <CexIcon />,
+      icon: <CexIcon className="w-14 h-14" />,
       description:
         "Sub-200ms latency and instant execution — trade like a centralized exchange while staying fully on-chain, self-custodial, and transparent.",
     },
     {
       title: "Collaborative ecosystem",
-      icon: <EcosystemIcon />,
+      icon: <EcosystemIcon className="w-14 h-14" />,
       description:
         "Permissionless. Transparent. Community-owned. The next evolution of decentralized trading.",
     },
     {
       title: "AI-powered intelligence",
-      icon: <IntelligenceIcon />,
+      icon: <IntelligenceIcon className="w-14 h-14" />,
       description:
         "Autonomous trading agents trained and validated by elite quant teams across the globe — bringing institutional precision to DeFi markets.",
     },
     {
       title: "Unified <br/> liquidity",
-      icon: <LiquidityIcon />,
+      icon: <LiquidityIcon className="w-14 h-14" />,
       description:
         "Omnichain orderbook connecting liquidity across blockchains. No bridges. No friction. Just seamless execution.",
     },
@@ -128,7 +128,7 @@ function Section4() {
                     {product.icon}
                   </motion.div>
                   <h3
-                    className="text-xl md:text-2xl font-medium text-white hidden md:block"
+                    className="text-xl md:text-3xl font-medium text-white hidden md:block"
                     dangerouslySetInnerHTML={{ __html: product.title }}
                   ></h3>
                   <h3 className="text-xl md:text-2xl font-medium text-white block md:hidden">
