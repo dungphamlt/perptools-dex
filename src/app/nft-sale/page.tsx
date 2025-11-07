@@ -60,6 +60,8 @@ const socialData = [
 ];
 
 const MINT_FEE = 0.01;
+const SOL_PRICE_API =
+  "https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd";
 
 type StatusType = "info" | "error" | "success";
 
@@ -94,6 +96,7 @@ export default function NftSalePage() {
     gold: null,
     platinum: null,
   });
+  const [solPriceUsd, setSolPriceUsd] = useState<number | null>(null);
   const [umi, setUmi] = useState<Umi | null>(null);
   const baseUmiRef = useRef<Umi>(createBaseUmi());
   const [isLoading, setIsLoading] = useState(false);
@@ -132,6 +135,28 @@ export default function NftSalePage() {
     },
     [showToast]
   );
+
+  useEffect(() => {
+    const fetchSolPrice = async () => {
+      try {
+        const response = await fetch(SOL_PRICE_API);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch SOL price: ${response.status}`);
+        }
+        const data = (await response.json()) as {
+          solana?: { usd?: number };
+        };
+        const priceUsd = data.solana?.usd;
+        if (typeof priceUsd === "number" && Number.isFinite(priceUsd)) {
+          setSolPriceUsd(priceUsd);
+        }
+      } catch (error) {
+        console.error("[SOL Price] Unable to fetch price", error);
+      }
+    };
+
+    void fetchSolPrice();
+  }, []);
 
   useEffect(() => {
     setUmi(baseUmiRef.current);
@@ -442,7 +467,13 @@ export default function NftSalePage() {
                     <span className="pr-2 text-lg font-medium text-white">
                       {selectedStats.priceSol.toFixed(4)} SOL
                     </span>
-                    <span className="font-medium text-gray-400">(160$)</span>
+                    {typeof solPriceUsd === "number" ? (
+                      <span className="font-medium text-gray-400">
+                        {`(~$${(selectedStats.priceSol * solPriceUsd).toFixed(
+                          2
+                        )})`}
+                      </span>
+                    ) : null}
                   </div>
                   <div className="flex gap-6 px-4 py-1 text-lg font-medium text-white rounded-lg border border-primary/40">
                     <button
