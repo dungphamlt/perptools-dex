@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
+import { WalletContextProvider } from "../components/WalletProvider";
 
 export const metadata: Metadata = {
   title: "PERPTools",
@@ -17,7 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-black antialiased">{children}</body>
+      <body className="min-h-screen bg-black antialiased">
+        <WalletContextProvider>{children}</WalletContextProvider>
+      </body>
     </html>
   );
 }
