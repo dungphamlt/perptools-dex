@@ -1,26 +1,237 @@
 @import "tailwindcss";
 
+/* CSS Variables - Biến màu */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-primary: #64d6ff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Đăng ký màu primary vào Tailwind để sử dụng với bg-primary, text-primary, v.v. */
+@theme {
+  --color-primary: #64d6ff;
+  --color-primary-DEFAULT: var(--color-primary);
+
+  /* Bật container utility */
+  --default-container-size: 1280px;
+
+  /* Font family */
+  --font-family-sans: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* CSS Reset cơ bản */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Styles cơ bản cho HTML và Body */
+html {
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Background gradient - primary 30% ở 2 góc, black 100% ở giữa */
+.dark-gradient-bg {
+  background: 
+    /* Black ở giữa */ #000000,
+    /* Góc trên phải - primary linear 30% */
+      radial-gradient(
+        circle 800px at top right,
+        rgba(100, 214, 255, 0.3) 0%,
+        rgba(100, 214, 255, 0.2) 20%,
+        rgba(100, 214, 255, 0.1) 40%,
+        rgba(100, 214, 255, 0.05) 60%,
+        transparent 80%,
+        #000000 100%
+      ),
+    /* Góc dưới trái - primary linear 30% */
+      radial-gradient(
+        circle 800px at bottom left,
+        rgba(100, 214, 255, 0.3) 0%,
+        rgba(100, 214, 255, 0.2) 20%,
+        rgba(100, 214, 255, 0.1) 40%,
+        rgba(100, 214, 255, 0.05) 60%,
+        transparent 80%,
+        #000000 100%
+      );
+}
+
+/* Gradient overlay ở góc trên phải - transparent để nhìn thấy ảnh */
+.gradient-corner-top-right {
+  background: radial-gradient(
+    circle 600px at top right,
+    transparent 0%,
+    transparent 35%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.7) 70%,
+    rgba(0, 0, 0, 0.95) 90%,
+    #000000 100%
+  );
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+
+/* Gradient overlay ở góc dưới trái - transparent để nhìn thấy ảnh */
+.gradient-corner-bottom-left {
+  background: radial-gradient(
+    circle 600px at bottom left,
+    transparent 0%,
+    transparent 35%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.7) 70%,
+    rgba(0, 0, 0, 0.95) 90%,
+    #000000 100%
+  );
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+
+/* Gradient overlay với primary/10 */
+.primary-gradient-overlay {
+  background: radial-gradient(
+    circle at center,
+    rgba(100, 214, 255, 0.1) 0%,
+    rgba(100, 214, 255, 0.05) 50%,
+    transparent 100%
+  );
+}
+
+/* Gradient border với glow effect */
+.gradient-border {
+  position: relative;
+  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    rgba(100, 214, 255, 0.8) 0%,
+    rgba(100, 214, 255, 0.4) 25%,
+    rgba(100, 214, 255, 0.6) 50%,
+    rgba(100, 214, 255, 0.4) 75%,
+    rgba(100, 214, 255, 0.8) 100%
+  );
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(100, 214, 255, 0.3),
+    0 0 40px rgba(100, 214, 255, 0.2), inset 0 0 20px rgba(100, 214, 255, 0.1);
+}
+
+.gradient-border-inner {
+  background: #000000;
+  border-radius: calc(1rem - 2px);
+  width: 100%;
+  height: 100%;
+}
+
+/* Content layer background với radial gradients màu primary */
+.content-layer-bg {
+  position: relative;
+  background: radial-gradient(at -16% 10%, #009dff 3%, transparent 16%),
+    radial-gradient(ellipse at 50% 243%, #009dff 13%, transparent 53%);
+  overflow: hidden;
+}
+
+/* Light streaks - các vệt sáng phản chiếu */
+.content-layer-bg::before,
+.content-layer-bg::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Vệt sáng chính - từ trên trái xuống dưới phải */
+.content-layer-bg::before {
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    transparent 30%,
+    rgba(0, 157, 255, 0.15) 45%,
+    rgba(0, 157, 255, 0.3) 50%,
+    rgba(0, 157, 255, 0.15) 55%,
+    transparent 70%,
+    transparent 100%
+  );
+  background-size: 200% 200%;
+  background-position: 25% 25%;
+  opacity: 0.8;
+}
+
+/* Vệt sáng phụ - từ trên phải xuống dưới trái */
+.content-layer-bg::after {
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(0, 157, 255, 0.12) 48%,
+    rgba(0, 157, 255, 0.25) 50%,
+    rgba(0, 157, 255, 0.12) 52%,
+    transparent 60%,
+    transparent 100%
+  );
+  background-size: 250% 250%;
+  background-position: 100% 75%;
+  opacity: 0.7;
+}
+
+/* Vệt cong bên trái - curved streak */
+.curved-streak-left {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 800px 350px at 0% 85%,
+    rgba(0, 157, 255, 0.35) 0%,
+    rgba(0, 157, 255, 0.25) 8%,
+    rgba(0, 157, 255, 0.15) 18%,
+    rgba(0, 157, 255, 0.08) 28%,
+    rgba(0, 157, 255, 0.03) 38%,
+    transparent 50%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    transparent 5%,
+    rgba(0, 0, 0, 0.4) 8%,
+    rgba(0, 0, 0, 0.7) 12%,
+    rgba(0, 0, 0, 1) 18%,
+    rgba(0, 0, 0, 0.95) 22%,
+    rgba(0, 0, 0, 0.7) 28%,
+    rgba(0, 0, 0, 0.4) 32%,
+    rgba(0, 0, 0, 0.1) 38%,
+    transparent 45%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    transparent 5%,
+    rgba(0, 0, 0, 0.4) 8%,
+    rgba(0, 0, 0, 0.7) 12%,
+    rgba(0, 0, 0, 1) 18%,
+    rgba(0, 0, 0, 0.95) 22%,
+    rgba(0, 0, 0, 0.7) 28%,
+    rgba(0, 0, 0, 0.4) 32%,
+    rgba(0, 0, 0, 0.1) 38%,
+    transparent 45%,
+    transparent 100%
+  );
 }
