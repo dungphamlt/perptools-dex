@@ -90,7 +90,7 @@ function Banner() {
                 <ChevronRight className="w-6 h-6" />
               </motion.button>
               <motion.button
-                onClick={() => router.push("/npt-sale")}
+                onClick={() => router.push("/nft-sale")}
                 className="px-8 py-2 font-semibold rounded-md bg-white text-black hover:bg-primary transition-colors cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

@@ -138,7 +138,7 @@ function NftSale() {
             <span>Back Home</span>
           </Link>
         </div>
-        <div className="flex justify-between flex-wrap gap-10 px-0 md:px-16 mt-8">
+        <div className="flex justify-between flex-col md:flex-row gap-10 px-0 md:px-16 mt-8">
           <div className="w-full md:w-5/12 ">
             <div className="mb-8">
               <Image
