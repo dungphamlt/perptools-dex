@@ -25,31 +25,29 @@ import Onyx from "../../assets/images/Onyx.svg?url";
 import Gold from "../../assets/images/Gold.svg?url";
 import Platinum from "../../assets/images/Platinum.svg?url";
 
-function NftSale() {
-  const [selectedNft, setSelectedNft] = useState<string>("Platinum");
-  const [amountSol, setAmountSol] = useState<number>(1);
-  const [isOverviewExpanded, setIsOverviewExpanded] = useState<boolean>(true);
-  const MINT_FEE = 0.009;
-  const nftSaleData = [
-    {
-      name: "Onyx",
-      image: Onyx,
-      overView:
-        "A symbol of true mastery in the PerpTools ecosystem. Only a handful exist. Onyx holders gain top-tier access to AI trading intelligence, early protocol features, private strategy sessions, and the highest yield multipliers. The ultimate level of exclusivity and influence.",
-    },
-    {
-      name: "Gold",
-      image: Gold,
-      overView:
-        "Your gateway to the PerpTools community. Enjoy early access to new tools, reward boosts, and entry into exclusive community events. Built for dedicated traders ready to grow with the ecosystem.",
-    },
-    {
-      name: "Platinum",
-      image: Platinum,
-      overView:
-        "For those at the frontier of trading innovation. Platinum holders unlock early access to experimental AI agents, higher reward rates, and priority participation in upcoming drops and events. A perfect balance of power, privilege, and performance.",
-    },
-  ];
+const nftSaleData = [
+  {
+    name: "Onyx",
+    key: "onyx" as TierKey,
+    image: Onyx,
+    overview:
+      "A symbol of true mastery in the PerpTools ecosystem. Only a handful exist. Onyx holders gain top-tier access to AI trading intelligence, early protocol features, private strategy sessions, and the highest yield multipliers. The ultimate level of exclusivity and influence.",
+  },
+  {
+    name: "Gold",
+    key: "gold" as TierKey,
+    image: Gold,
+    overview:
+      "Your gateway to the PerpTools community. Enjoy early access to new tools, reward boosts, and entry into exclusive community events. Built for dedicated traders ready to grow with the ecosystem.",
+  },
+  {
+    name: "Platinum",
+    key: "platinum" as TierKey,
+    image: Platinum,
+    overview:
+      "For those at the frontier of trading innovation. Platinum holders unlock early access to experimental AI agents, higher reward rates, and priority participation in upcoming drops and events. A perfect balance of power, privilege, and performance.",
+  },
+];
 
 const socialData = [
   { name: "twitter", link: "https://twitter.com/perptools", Icon: Twitter },
@@ -513,10 +511,7 @@ export default function NftSalePage() {
               {isOverviewExpanded && (
                 <div className="space-y-4">
                   <p className="text-base leading-relaxed text-gray-300">
-                    {
-                      nftSaleData.find((nft) => nft.name === selectedNft)
-                        ?.overView
-                    }
+                    {selectedNft.overview}
                   </p>
                 </div>
               )}
