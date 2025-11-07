@@ -3,8 +3,11 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "PerpTools",
+  title: "PERPTools",
   description: "AI meets DeFi — Perpetuals Reinvented",
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({

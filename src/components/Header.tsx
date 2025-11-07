@@ -37,7 +37,7 @@ function Header() {
           <div className="flex items-center gap-2">
             <Logo className="w-10 h-10 md:w-12 md:h-12" />
             <h1 className="text-xl md:text-2xl font-bold text-white">
-              PerpTools
+              PERPTools
             </h1>
           </div>
 
