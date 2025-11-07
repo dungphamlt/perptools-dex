@@ -1,12 +1,22 @@
 "use client";
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import Logo from "../assets/icons/logo.svg";
 import { ChevronRight, ExternalLink, Menu, X } from "lucide-react";
 import TwitterIcon from "../assets/icons/twitter.svg";
 import DiscordIcon from "../assets/icons/discord.svg";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+
+const WalletMultiButton = dynamic(
+  async () => {
+    const { WalletMultiButton: Button } = await import(
+      "@solana/wallet-adapter-react-ui"
+    );
+    return Button;
+  },
+  { ssr: false }
+);
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -60,11 +70,11 @@ function Header() {
           {/* Desktop Launch App Button */}
           <div className="hidden gap-2 items-center md:flex">
             {pathname === "/nft-sale" ? (
-              <WalletMultiButton className="bg-linear-to-b! from-[#2BB9F3]! to-[#83D4FB]! text-black! hover:from-primary! hover:to-primary! transition-all! duration-300! rounded-lg! font-medium!" />
+              <WalletMultiButton className="bg-linear-to-b from-[#2BB9F3] to-[#83D4FB] text-black hover:from-primary hover:to-primary transition-all duration-300 rounded-lg font-medium" />
             ) : (
               <Link
                 href="/nft-sale"
-                className="flex items-center gap-1 px-4 py-2 rounded-md bg-gradient-to-b from-[#2BB9F3] to-[#83D4FB] text-black font-semibold hover:bg-gradient-to-b hover:from-primary hover:to-primary transition-all duration-300 cursor-pointer hover:scale-105"
+                className="flex items-center gap-1 px-4 py-2 rounded-md bg-linear-to-b from-[#2BB9F3] to-[#83D4FB] text-black font-semibold hover:bg-linear-to-b hover:from-primary hover:to-primary transition-all duration-300 cursor-pointer hover:scale-105"
               >
                 <span>Launch App</span>
                 <ChevronRight className="w-5 h-5" />
