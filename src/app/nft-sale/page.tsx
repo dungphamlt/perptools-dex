@@ -20,14 +20,20 @@ function NftSale() {
     {
       name: "Onyx",
       image: Onyx,
+      overView:
+        "A symbol of true mastery in the PerpTools ecosystem. Only a handful exist. Onyx holders gain top-tier access to AI trading intelligence, early protocol features, private strategy sessions, and the highest yield multipliers. The ultimate level of exclusivity and influence.",
     },
     {
       name: "Gold",
       image: Gold,
+      overView:
+        "Your gateway to the PerpTools community. Enjoy early access to new tools, reward boosts, and entry into exclusive community events. Built for dedicated traders ready to grow with the ecosystem.",
     },
     {
       name: "Platinum",
       image: Platinum,
+      overView:
+        "For those at the frontier of trading innovation. Platinum holders unlock early access to experimental AI agents, higher reward rates, and priority participation in upcoming drops and events. A perfect balance of power, privilege, and performance.",
     },
   ];
 
@@ -191,15 +197,10 @@ function NftSale() {
               {isOverviewExpanded && (
                 <div className="space-y-4">
                   <p className="text-gray-300 text-base leading-relaxed">
-                    Kyzzen.io is your all-in-one explorer for opportunities on
-                    Solana, aggregating data from Solana's major protocols to
-                    highlight the best opportunities spanning tokens, NFTs,
-                    DeFi, DePIN, airdrops and more.
-                  </p>
-                  <p className="text-gray-300 text-base leading-relaxed">
-                    The Kyzzen no Sekai NFT unlocks our most advanced products:
-                    premium alpha signals, unique analytics, and rich portfolio
-                    intelligence to guide smarter, faster decisions.
+                    {
+                      nftSaleData.find((nft) => nft.name === selectedNft)
+                        ?.overView
+                    }
                   </p>
                 </div>
               )}
